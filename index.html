@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator Determinan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffe4ec; /* background pink pastel */
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            border-top: 6px solid #f472b6; /* pink */
+        }
+
+        h2 {
+            color: #be185d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #fbcfe8;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #f472b6;
+            box-shadow: 0 0 6px rgba(244,114,182,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ec4899; /* pink utama */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #db2777;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .positive {
+            background: #fce7f3;
+            color: #9d174d;
+        }
+
+        .zero {
+            background: #fdf2f8;
+            color: #831843;
+        }
+
+        .negative {
+            background: #ffe4e6;
+            color: #9f1239;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Kalkulator Determinan</h2>
+    <input type="number" id="inputA" placeholder="Masukkan Nilai A">
+    <input type="number" id="inputB" placeholder="Masukkan Nilai B">
+    <input type="number" id="inputC" placeholder="Masukkan Nilai C">
+    <button onclick="hitungDeterminan()">Hitung Sekarang</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function hitungDeterminan() {
+        let a = parseFloat(document.getElementById('inputA').value);
+        let b = parseFloat(document.getElementById('inputB').value);
+        let c = parseFloat(document.getElementById('inputC').value);
+        let resDiv = document.getElementById('result');
+
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+            alert("Harap masukkan semua angka!");
+            return;
+        }
+
+        let d = (b * b) - (4 * a * c);
+        let ket = "";
+        resDiv.className = "";
+
+        if (d > 0) {
+            ket = "Di atas garis kurva";
+            resDiv.classList.add('positive');
+        } else if (d === 0) {
+            ket = "Berada di garis kurva";
+            resDiv.classList.add('zero');
+        } else {
+            ket = "Di bawah garis kurva";
+            resDiv.classList.add('negative');
+        }
+
+        resDiv.style.display = "block";
+        resDiv.innerHTML = `<strong>Hasil: ${d}</strong><br><small>${ket}</small>`;
+    }
+</script>
+
+</body>
+</html>
